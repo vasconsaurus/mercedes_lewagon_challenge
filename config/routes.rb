@@ -3,4 +3,7 @@ Rails.application.routes.draw do
   Rails.application.routes.draw do
     resources :museums
   end
+
+  get 'museums_results', to: 'museums#search', as: 'museums_results'
+  root to: 'museums#index'
 end
