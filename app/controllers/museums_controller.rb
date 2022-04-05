@@ -6,6 +6,9 @@ class MuseumsController < ApplicationController
     url = "https://api.mapbox.com/geocoding/v5/mapbox.places/museum.json?type=poi&proximity=#{lng},#{lat}&access_token=#{ENV['MAPBOX_URL']}"
 
     url_response = JSON.parse(URI.open(url).read)
+    features = url_response["features"]
+    museum = features.map { |feature| feature["text"] }
+    postcode = features.map { |feature| feature["context"][0]["text"]}
     byebug
   end
 
