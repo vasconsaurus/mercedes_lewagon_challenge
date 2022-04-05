@@ -1,6 +1,12 @@
+require 'open-uri'
+
 class MuseumsController < ApplicationController
   def search
-    coordinates = validate_params(params[:lat], params[:lng])
+    lat, lng = params.values_at(:lat, :lng)
+    url = "https://api.mapbox.com/geocoding/v5/mapbox.places/museum.json?type=poi&proximity=#{lng},#{lat}&access_token=#{ENV['MAPBOX_URL']}"
+
+    url_response = JSON.parse(URI.open(url).read)
+    byebug
   end
 
   private
