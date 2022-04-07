@@ -13,7 +13,7 @@ class MuseumsController < ApplicationController
     museums = features.map { |feature| feature["text"] }
     postcodes = features.map { |feature| feature["context"][0]["text"]}
 
-    code_hash = Hash[postcodes.collect { |code| [code, ""]}]
+    museum_hash = postcodes.zip(museums).to_h
     byebug
   end
 
