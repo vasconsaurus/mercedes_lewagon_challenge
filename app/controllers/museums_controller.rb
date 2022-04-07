@@ -1,4 +1,7 @@
 require 'open-uri'
+# test request:
+# /museums?lat=52.494857&lng=13.437641
+
 
 class MuseumsController < ApplicationController
   def search
@@ -7,8 +10,10 @@ class MuseumsController < ApplicationController
 
     url_response = JSON.parse(URI.open(url).read)
     features = url_response["features"]
-    museum = features.map { |feature| feature["text"] }
-    postcode = features.map { |feature| feature["context"][0]["text"]}
+    museums = features.map { |feature| feature["text"] }
+    postcodes = features.map { |feature| feature["context"][0]["text"]}
+
+    code_hash = Hash[postcodes.collect { |code| [code, ""]}]
     byebug
   end
 
