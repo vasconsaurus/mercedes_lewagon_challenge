@@ -18,7 +18,7 @@ class MuseumsController < ApplicationController
     museums_per_code = {}
     features.each do |feature|
       museums_per_code[feature["context"][0]["text"]] = [] if museums_per_code[feature["context"][0]["text"]].blank?
-      museums_per_code << feature["text"]
+      museums_per_code[feature["context"][0]["text"]] << feature["text"]
     end
 
     byebug
