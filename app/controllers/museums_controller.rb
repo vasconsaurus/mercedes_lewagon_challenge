@@ -10,15 +10,16 @@ class MuseumsController < ApplicationController
 
     url_response = JSON.parse(URI.open(url).read)
     features = url_response["features"]
-    museums = features.map { |feature| feature["text"] }
-    postcodes = features.map { |feature| feature["context"][0]["text"]}
+    # museums = features.map { |feature| feature["text"] }
+    # postcodes = features.map { |feature| feature["context"][0]["text"]}
 
-    museum_hash = postcodes.zip(museums).to_h
+    # museum_hash = postcodes.zip(museums).to_h
 
-    # features.each_with_object({}) do |museum, hash|
-    #   hash[museum["context"][0]["text"]] = [] unless hash[museum['context'][0]['text']]
-    #   hash[museum["context"][0]["text"]] << museum["text"]
-    # end
+    museums_per_code = {}
+    features.each do |feature|
+      museums_per_code[feature["context"][0]["text"]] = [] if museums_per_code[feature["context"][0]["text"]].blank?
+      museums_per_code << feature["text"]
+    end
 
     byebug
   end
