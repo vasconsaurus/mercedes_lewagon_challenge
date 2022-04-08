@@ -14,6 +14,12 @@ class MuseumsController < ApplicationController
     postcodes = features.map { |feature| feature["context"][0]["text"]}
 
     museum_hash = postcodes.zip(museums).to_h
+
+    # features.each_with_object({}) do |museum, hash|
+    #   hash[museum["context"][0]["text"]] = [] unless hash[museum['context'][0]['text']]
+    #   hash[museum["context"][0]["text"]] << museum["text"]
+    # end
+
     byebug
   end
 
